@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
+    #region Singleton
     public static SoundManager Instance { get; private set; }
+    #endregion
 
+    #region Unity Editor Variables
     [SerializeField] List<Sound> sounds;
+    #endregion
 
+    #region Unity Functions
     private void Awake()
     {
         Instance = this;
@@ -21,7 +26,9 @@ public class SoundManager : MonoBehaviour
             sound.audioSource.clip = sound.audioClip;
         }
     }
+    #endregion
 
+    #region SoundManager Functions
     public void PlaySound(string _audioName)
     {
         Sound sound = sounds.Find(s => s.name == _audioName);
@@ -31,6 +38,5 @@ public class SoundManager : MonoBehaviour
         else
             sound.audioSource.Play();
     }
-
-
+    #endregion
 }

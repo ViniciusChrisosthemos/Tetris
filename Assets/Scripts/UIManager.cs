@@ -7,22 +7,28 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    #region Unity Editor Variables
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI comboText;
     [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private TextMeshProUGUI xpText;
     [SerializeField] private TextMeshProUGUI nextLevelXp;
-
     [SerializeField] private List<Sprite> fullBlocksSprites;
     [SerializeField] private List<Image> fullBlocksQueue;
+    #endregion
 
+    #region Singleton
     public static UIManager Instance { get; private set; }
+    #endregion
 
+    #region Unity Functions
     private void Awake()
     {
         Instance = this;
     }
+    #endregion
 
+    #region UIManager Functions
     public void UpdateBlockQueue(int[] _queue)
     {
         for (int i = 0; i < fullBlocksQueue.Count; i++)
@@ -47,4 +53,5 @@ public class UIManager : MonoBehaviour
         xpText.text = _xp.ToString();
         nextLevelXp.text = _nextLevelXp.ToString();
     }
+    #endregion
 }

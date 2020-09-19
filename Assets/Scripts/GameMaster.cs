@@ -6,19 +6,31 @@ using Random = System.Random;
 
 public class GameMaster : MonoBehaviour
 {
+    #region Singleton
     public static GameMaster Instance { get; private set; }
+    #endregion
 
+    #region Unity Editor Variables
+    [Header("Gameplay")]
     [SerializeField] private Board board;
+
+    [Header("UI")]
     [SerializeField] private List<GameObject> blocksPrefabs;
+
+    [Header("SFX")]
     [SerializeField] private List<string> lineDeletedSounds;
+    #endregion
 
-    private Queue<int> blocksQueue;
+    #region Control Variables
     private Random random;
-
     private Transform[,] grid;
+    private Queue<int> blocksQueue;
+    #endregion
 
+    #region Gameplay Configuration
     private int score = 0;
     private int pointsPerLine = 100;
+
     private float currentCombo = 0;
     private float comboRate = .5f;
 
@@ -32,7 +44,9 @@ public class GameMaster : MonoBehaviour
     private float defaultBlockSpeed = .8f;
     private float blockSpeed;
     private float speedRate = .8f;
+    #endregion
 
+    #region Unity Functions
     private void Awake()
     {
         Instance = this;
@@ -45,6 +59,13 @@ public class GameMaster : MonoBehaviour
         ResetConfigs();
     }
 
+    private void Start()
+    {
+        SpawnBlock();
+    }
+    #endregion
+
+    #region GameMaster Functions
     private void ResetConfigs()
     {
         blockSpeed = defaultBlockSpeed;
@@ -68,11 +89,6 @@ public class GameMaster : MonoBehaviour
         {
             blocksQueue.Enqueue(random.Next(blocksPrefabs.Count));
         }
-    }
-
-    private void Start()
-    {
-        SpawnBlock();
     }
 
     public void SpawnBlock()
@@ -99,12 +115,16 @@ public class GameMaster : MonoBehaviour
             for (int y = 0; y < board.BoardHeight; y++)
             {
                 if (grid[x, y] != null)
+                {
                     Destroy(grid[x, y].gameObject);
+                    grid[x, y] = null;
+                }
             }
         }
 
         ResetConfigs();
         StartBlockQueue();
+        SpawnBlock();
     }
 
     public void ApplyBlock(Transform[] blocks)
@@ -221,4 +241,5 @@ public class GameMaster : MonoBehaviour
             }
         }
     }
+    #endregion
 }

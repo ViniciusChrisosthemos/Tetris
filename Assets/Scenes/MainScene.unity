@@ -924,32 +924,32 @@ MonoBehaviour:
   sounds:
   - name: move
     audioClip: {fileID: 8300000, guid: c2b09b80cb2f39a43baf2dd3354dd7d5, type: 3}
-    volume: 1
+    volume: 0.5
     pitch: 1
     audioSource: {fileID: 0}
   - name: blockedMove
     audioClip: {fileID: 8300000, guid: e53b724c1200a0342919567177c01189, type: 3}
-    volume: 1
+    volume: 0.5
     pitch: 1
     audioSource: {fileID: 0}
   - name: rotate
     audioClip: {fileID: 8300000, guid: 1e60e352f1c2f5a4bbda9d5cd0a59169, type: 3}
-    volume: 1
+    volume: 0.5
     pitch: 1
     audioSource: {fileID: 0}
   - name: lineDeleted1
     audioClip: {fileID: 8300000, guid: f9328ef2cb43b264583cd2dd62b43376, type: 3}
-    volume: 1
+    volume: 0.6
     pitch: 1
     audioSource: {fileID: 0}
   - name: lineDeleted2
     audioClip: {fileID: 8300000, guid: 3f5953da57c444143ad692d436cdcdf4, type: 3}
-    volume: 1
+    volume: 0.8
     pitch: 1
     audioSource: {fileID: 0}
   - name: lineDeleted3
     audioClip: {fileID: 8300000, guid: 6e97d5af5e6048844a632b1fe983c6a5, type: 3}
-    volume: 1
+    volume: 0.9
     pitch: 1
     audioSource: {fileID: 0}
   - name: lineDeleted4

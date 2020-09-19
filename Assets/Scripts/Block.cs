@@ -5,24 +5,29 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
-    private Transform myTransform;
-    public Vector3 rotationPoint;
-    private float moveInterval = 0.08f;
-    private float blockSpeed = 1;
-    private float nextMove = 0;
-
+    #region Unity Editor Variables
+    [Header("SFX")]
     [SerializeField] private string moveAudioName;
     [SerializeField] private string blockedMoveAudioName;
     [SerializeField] private string rotateAudioName;
+    #endregion
 
+    #region Control Variables
     public Transform[] Blocks { get; private set; }
+    private Transform myTransform;
+    public Vector3 rotationPoint;
+    #endregion
 
-    private Block myScript;
+    #region Gameplay Configuration
+    private float moveInterval = 0.08f;
+    private float blockSpeed = 1;
+    private float nextMove = 0;
+    #endregion
 
+    #region Unity Functions
     private void Awake()
     {
         myTransform = GetComponent<Transform>();
-        myScript = GetComponent<Block>();
 
         int i = 0;
         Transform[] _blocks = GetComponentsInChildren<Transform>();
@@ -67,7 +72,9 @@ public class Block : MonoBehaviour
             }
         }
     }
+    #endregion
 
+    #region Block Functions
     private void DestroyBlock()
     {
         foreach (Transform _block in Blocks)
@@ -101,7 +108,7 @@ public class Block : MonoBehaviour
         //myTransform.Rotate(new Vector3(0, 0, -90));
     }
 
-    internal void SetSpeed(float _blockSpeed)
+    public void SetSpeed(float _blockSpeed)
     {
         blockSpeed = _blockSpeed;
     }
@@ -121,4 +128,5 @@ public class Block : MonoBehaviour
         SoundManager.Instance.PlaySound(moveAudioName);
         return true;
     }
+    #endregion
 }
