@@ -6,6 +6,9 @@ using UnityEngine;
 public class TetrisBlock : MonoBehaviour
 {
     #region Unity Editor Variables
+    [Header("Gameplay")]
+    [SerializeField] private GameObject ghostPrefab;
+
     [Header("SFX")]
     [SerializeField] private string moveAudioName;
     [SerializeField] private string blockedMoveAudioName;
@@ -15,7 +18,8 @@ public class TetrisBlock : MonoBehaviour
     #region Control Variables
     public Transform[] Blocks { get; private set; }
     private Transform myTransform;
-    public Vector3 rotationPoint;
+    private Vector3 rotationPoint;
+    private TetrisGhost ghost; 
     #endregion
 
     #region Gameplay Configuration
@@ -40,25 +44,32 @@ public class TetrisBlock : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        ghost = Instantiate(ghostPrefab, Vector3.zero, Quaternion.identity).GetComponent<TetrisGhost>();
+        ghost.SetRotation(myTransform.rotation);
+        ghost.UpdateGhost(myTransform.position);
+    }
+
     private void Update()
     {
         nextMove += Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            MoveBlock(new Vector3(-1, 0, 0));
+            MoveBlock(Vector3.left);
 
-
-        }else if (Input.GetKeyDown(KeyCode.D))
+        }else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            MoveBlock(new Vector3(1, 0, 0));
+            MoveBlock(Vector3.right);
 
-        }else if (Input.GetKeyDown(KeyCode.W))
+        }else if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             RotateBlock();
+
         }
 
-        if (nextMove > (Input.GetKey(KeyCode.S) ? moveInterval:blockSpeed))
+        if (nextMove > blockSpeed)
         {
             nextMove = 0;
             if (!MoveBlock(new Vector3(0, -1, 0)))
@@ -70,6 +81,15 @@ public class TetrisBlock : MonoBehaviour
                 //myScript.enabled = false;
                 DestroyBlock();
             }
+        }else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            int count = 0;
+            while (MoveBlock(Vector3.down))
+            {
+                count++;
+            }
+
+            nextMove = (count == 0) ? blockSpeed : 0;
         }
     }
     #endregion
@@ -82,6 +102,7 @@ public class TetrisBlock : MonoBehaviour
             _block.parent = GameMaster.Instance.gameObject.transform;
         }
 
+        Destroy(ghost.gameObject);
         Destroy(gameObject);
     }
 
@@ -102,6 +123,8 @@ public class TetrisBlock : MonoBehaviour
                 Blocks[i].transform.rotation = Quaternion.identity;
             }
 
+            ghost.SetRotation(myTransform.rotation);
+            ghost.UpdateGhost(myTransform.position);
             SoundManager.Instance.PlaySound(moveAudioName);
         }
             
@@ -125,6 +148,7 @@ public class TetrisBlock : MonoBehaviour
             return false;
         }
 
+        ghost.UpdateGhost(myTransform.position);
         SoundManager.Instance.PlaySound(moveAudioName);
         return true;
     }

@@ -41,17 +41,12 @@ public class UIManager : MonoBehaviour
 
     public void SetScore(int _score)
     {
-        scoreText.text = _score.ToString();
-    }
-
-    public void SetCombo(float _combo)
-    {
-        comboText.text = string.Format("{0:0.00}x", _combo);
+        scoreText.text = $"Score: {_score}";
     }
 
     public void SetBlockedSpeed(float _blockSpeed)
     {
-        blockSpeedText.text = string.Format("Block speed: {0:0.0} movements p/ second", _blockSpeed);
+        blockSpeedText.text = string.Format("Block speed: {0:0.0}", _blockSpeed);
     }
 
     public void SetNextLevelXp(int _nextLevelXp)
@@ -67,12 +62,12 @@ public class UIManager : MonoBehaviour
 
     public void SetLevel(int _level)
     {
-        levelText.text = _level.ToString();
+        levelText.text = $"Level {_level}";
     }
 
     public void SetCurrentCombo(float _currentCombo)
     {
-        comboText.text = string.Format("{0:0.00}x", _currentCombo);
+        comboText.text = string.Format("Combo {0:0.00}x", _currentCombo);
     }
     #endregion
 }

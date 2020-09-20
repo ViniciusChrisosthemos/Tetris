@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 509192887151801177}
   - component: {fileID: 509192887151801176}
+  - component: {fileID: 1410009782898940924}
   m_Layer: 0
   m_Name: Block (2)
   m_TagString: Untagged
@@ -50,7 +51,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -82,6 +83,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1410009782898940924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509192887151801178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7fd8613289b1254e8e5274f0feda4f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionEffect: {fileID: 982049178714124683, guid: 5df9619374316184f85748efb3cf3512, type: 3}
+  explosionColor: {r: 1, g: 0.5362388, b: 0, a: 1}
 --- !u!1 &509192887383404303
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 870108334a136fc439bf181fe34c3f57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationPoint: {x: 0.5, y: 0.5, z: 0}
+  ghostPrefab: {fileID: 912747917358369937, guid: c16f8be4d525e2c43b90443e302bb623, type: 3}
   moveAudioName: move
   blockedMoveAudioName: blockedMove
   rotateAudioName: rotate
@@ -143,6 +158,7 @@ GameObject:
   m_Component:
   - component: {fileID: 509192887919602690}
   - component: {fileID: 509192887919602689}
+  - component: {fileID: 4969516075676502326}
   m_Layer: 0
   m_Name: Block (1)
   m_TagString: Untagged
@@ -183,7 +199,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -215,6 +231,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4969516075676502326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509192887919602691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7fd8613289b1254e8e5274f0feda4f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionEffect: {fileID: 982049178714124683, guid: 5df9619374316184f85748efb3cf3512, type: 3}
+  explosionColor: {r: 1, g: 0.5362388, b: 0, a: 1}
 --- !u!1 &509192888051373492
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,6 +255,7 @@ GameObject:
   m_Component:
   - component: {fileID: 509192888051373483}
   - component: {fileID: 509192888051373482}
+  - component: {fileID: 3578555834989459880}
   m_Layer: 0
   m_Name: Block (3)
   m_TagString: Untagged
@@ -265,7 +296,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -297,6 +328,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3578555834989459880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509192888051373492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7fd8613289b1254e8e5274f0feda4f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionEffect: {fileID: 982049178714124683, guid: 5df9619374316184f85748efb3cf3512, type: 3}
+  explosionColor: {r: 1, g: 0.5362388, b: 0, a: 1}
 --- !u!1 &509192888520335758
 GameObject:
   m_ObjectHideFlags: 0
@@ -307,6 +352,7 @@ GameObject:
   m_Component:
   - component: {fileID: 509192888520335757}
   - component: {fileID: 509192888520335756}
+  - component: {fileID: 811370117146879039}
   m_Layer: 0
   m_Name: Block
   m_TagString: Untagged
@@ -347,7 +393,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -379,3 +425,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &811370117146879039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509192888520335758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7fd8613289b1254e8e5274f0feda4f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionEffect: {fileID: 982049178714124683, guid: 5df9619374316184f85748efb3cf3512, type: 3}
+  explosionColor: {r: 1, g: 0.5362388, b: 0, a: 1}

@@ -1,16 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace Assets.Scripts
+public class Block : MonoBehaviour
 {
-    public class Block : MonoBehaviour
-    {
-        private Animator animator;
+    [SerializeField] private GameObject explosionEffect;
+    [SerializeField] private Color explosionColor;
 
-        private void Awake()
-        {
-            animator = GetComponent<Animator>();
-            animator.SetBool("inGame", true);
-        }
+    private void OnDestroy()
+    {
+        //BlockDestruction blockDestruction = Instantiate(explosionEffect, transform.position, Quaternion.identity).GetComponent<BlockDestruction>();
+        //blockDestruction.SetColor(explosionColor);
     }
 }
