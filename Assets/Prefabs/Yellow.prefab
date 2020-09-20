@@ -129,10 +129,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 870108334a136fc439bf181fe34c3f57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationPoint: {x: 0, y: 0, z: 0}
   moveAudioName: move
   blockedMoveAudioName: blockedMove
   rotateAudioName: rotate
+  rotationPoint: {x: 0, y: 0, z: 0}
 --- !u!1 &2557894839351459860
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,6 +19,8 @@ public class GameMaster : MonoBehaviour
 
     [Header("SFX")]
     [SerializeField] private List<string> lineDeletedSounds;
+    [SerializeField] private string blockAppliedAudio;
+    [SerializeField] private GameObject explosionParticles;
     #endregion
 
     #region Control Variables
@@ -44,6 +46,62 @@ public class GameMaster : MonoBehaviour
     private float defaultBlockSpeed = .8f;
     private float blockSpeed;
     private float speedRate = .8f;
+
+    public int NextLevelXp
+    {
+        get => nextLevelXp;
+        set
+        {
+            nextLevelXp = value;
+            UIManager.Instance.SetNextLevelXp(nextLevelXp);
+        }
+    }
+    public float BlockSpeed
+    {
+        get => blockSpeed;
+        set
+        {
+            blockSpeed = value;
+            UIManager.Instance.SetBlockedSpeed(blockSpeed);
+        }
+    }
+    public int Level
+    {
+        get => level;
+        set
+        {
+            level = value;
+            UIManager.Instance.SetLevel(level);
+        }
+    }
+    public int Xp
+    {
+        get => xp;
+        set
+        {
+            xp = value;
+            UIManager.Instance.SetXp(xp);
+        }
+    }
+    public int Score
+    {
+        get => score;
+        set
+        {
+            score = value;
+            UIManager.Instance.SetScore(score);
+        }
+    }
+    public float CurrentCombo
+    {
+        get => currentCombo;
+        set
+        {
+            currentCombo = value;
+            UIManager.Instance.SetCurrentCombo(currentCombo);
+        }
+    }
+
     #endregion
 
     #region Unity Functions
@@ -68,16 +126,12 @@ public class GameMaster : MonoBehaviour
     #region GameMaster Functions
     private void ResetConfigs()
     {
-        blockSpeed = defaultBlockSpeed;
-        score = 0;
-        currentCombo = 0;
-        level = 1;
-        xp = 0;
-        nextLevelXp = (int)(defaultXpLevel * xpRate * level);
-
-        UIManager.Instance.SetXpInfo(level, xp, nextLevelXp);
-        UIManager.Instance.SetScore(score);
-        UIManager.Instance.SetCombo(currentCombo);
+        NextLevelXp = defaultXpLevel;
+        Xp = 0;
+        Score = 0;
+        Level = 1;
+        CurrentCombo = 0;
+        BlockSpeed = defaultBlockSpeed;
     }
 
     private void StartBlockQueue()
@@ -93,7 +147,7 @@ public class GameMaster : MonoBehaviour
 
     public void SpawnBlock()
     {
-        Block _block = Instantiate(blocksPrefabs[blocksQueue.Dequeue()], board.SpawnPosition, Quaternion.identity).GetComponent<Block>();
+        TetrisBlock _block = Instantiate(blocksPrefabs[blocksQueue.Dequeue()], board.SpawnPosition, Quaternion.identity).GetComponent<TetrisBlock>();
         _block.SetSpeed(blockSpeed);
 
         if (!CheckBlockPosition(_block.Blocks))
@@ -139,6 +193,8 @@ public class GameMaster : MonoBehaviour
             grid[_roundedX, _roundedY] = _transform;
 
         }
+
+        SoundManager.Instance.PlaySound(blockAppliedAudio);
     }
 
     public bool CheckBlockPosition(Transform[] blocks)
@@ -178,30 +234,25 @@ public class GameMaster : MonoBehaviour
 
         if (linesDeleted > 0)
         {
-            currentCombo += comboRate * linesDeleted + .5f;
-            score += (int)(currentCombo * 100);
+            CurrentCombo += comboRate * linesDeleted + .5f;
+            Score += (int)(CurrentCombo * pointsPerLine);
 
-            xp += (int)(xpPerLine * currentCombo);
+            Xp += (int)(xpPerLine * CurrentCombo);
 
-            if (xp >= nextLevelXp)
+            if (Xp >= nextLevelXp)
             {
-                level++;
-                xp = 0;
-                nextLevelXp = (int)(defaultXpLevel * xpRate);
+                Level++;
+                NextLevelXp = (int)(NextLevelXp * xpRate);
+                Xp = 0;
 
-                blockSpeed *= speedRate; 
+                BlockSpeed *= speedRate; 
             }
-
-            UIManager.Instance.SetXpInfo(level, xp, nextLevelXp);
-            UIManager.Instance.SetScore(score);
-            UIManager.Instance.SetCombo(currentCombo);
 
             SoundManager.Instance.PlaySound(lineDeletedSounds[Math.Min(linesDeleted, lineDeletedSounds.Count-1)]);
         }
         else
         {
-            currentCombo = 0;
-            UIManager.Instance.SetCombo(currentCombo);
+            CurrentCombo = 0;
         }
 
     }
@@ -221,6 +272,7 @@ public class GameMaster : MonoBehaviour
     {
         for (int _x = 0; _x < board.BoardWidth; _x++)
         {
+            Instantiate(explosionParticles, grid[_x, _y].position, Quaternion.identity);
             Destroy(grid[_x, _y].gameObject);
             grid[_x, _y] = null;
         }

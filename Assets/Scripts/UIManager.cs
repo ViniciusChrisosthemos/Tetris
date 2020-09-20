@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -12,7 +13,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI comboText;
     [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private TextMeshProUGUI xpText;
-    [SerializeField] private TextMeshProUGUI nextLevelXp;
+    [SerializeField] private TextMeshProUGUI blockSpeedText;
+    [SerializeField] private Slider xpSlider;
     [SerializeField] private List<Sprite> fullBlocksSprites;
     [SerializeField] private List<Image> fullBlocksQueue;
     #endregion
@@ -47,11 +49,30 @@ public class UIManager : MonoBehaviour
         comboText.text = string.Format("{0:0.00}x", _combo);
     }
 
-    public void SetXpInfo(int _level, int _xp, int _nextLevelXp)
+    public void SetBlockedSpeed(float _blockSpeed)
+    {
+        blockSpeedText.text = string.Format("Block speed: {0:0.0} movements p/ second", _blockSpeed);
+    }
+
+    public void SetNextLevelXp(int _nextLevelXp)
+    {
+        xpSlider.maxValue = _nextLevelXp;
+    }
+
+    public void SetXp(int _xp)
+    {
+        xpText.text = $"{_xp} / {xpSlider.maxValue}";
+        xpSlider.value = _xp;
+    }
+
+    public void SetLevel(int _level)
     {
         levelText.text = _level.ToString();
-        xpText.text = _xp.ToString();
-        nextLevelXp.text = _nextLevelXp.ToString();
+    }
+
+    public void SetCurrentCombo(float _currentCombo)
+    {
+        comboText.text = string.Format("{0:0.00}x", _currentCombo);
     }
     #endregion
 }
