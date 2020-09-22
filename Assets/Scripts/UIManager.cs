@@ -17,6 +17,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Slider xpSlider;
     [SerializeField] private List<Sprite> fullBlocksSprites;
     [SerializeField] private List<Image> fullBlocksQueue;
+    [SerializeField] private PauseScreenController pauseScreen;
+    [SerializeField] private string pauseScreenSoundName;
     #endregion
 
     #region Singleton
@@ -68,6 +70,15 @@ public class UIManager : MonoBehaviour
     public void SetCurrentCombo(float _currentCombo)
     {
         comboText.text = string.Format("Combo {0:0.00}x", _currentCombo);
+    }
+
+    public void SetPauseScreen(bool _value)
+    {
+        if (_value)
+            pauseScreen.gameObject.SetActive(true);
+        
+        pauseScreen.SetActive(_value);
+        SoundManager.Instance.PlaySound(pauseScreenSoundName);
     }
     #endregion
 }

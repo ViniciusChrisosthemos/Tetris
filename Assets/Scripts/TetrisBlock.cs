@@ -114,7 +114,7 @@ public class TetrisBlock : MonoBehaviour
         if (!GameMaster.Instance.CheckBlockPosition(Blocks))
         {
             myTransform.RotateAround(myTransform.TransformPoint(rotationPoint), new Vector3(0, 0, 1), -90);
-            SoundManager.Instance.PlaySound(blockedMoveAudioName);
+            //SoundManager.Instance.PlaySound(blockedMoveAudioName);
         }
         else
         {
@@ -144,7 +144,7 @@ public class TetrisBlock : MonoBehaviour
         {
             myTransform.position += _direction * -1;
 
-            SoundManager.Instance.PlaySound(blockedMoveAudioName);
+            //SoundManager.Instance.PlaySound(blockedMoveAudioName);
             return false;
         }
 

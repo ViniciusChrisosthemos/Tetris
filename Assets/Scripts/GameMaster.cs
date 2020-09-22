@@ -27,6 +27,7 @@ public class GameMaster : MonoBehaviour
     private Random random;
     private Transform[,] grid;
     private Queue<int> blocksQueue;
+    private TetrisBlock block;
     #endregion
 
     #region Gameplay Configuration
@@ -121,6 +122,26 @@ public class GameMaster : MonoBehaviour
     {
         SpawnBlock();
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (Time.timeScale == 0)
+            {
+                block.enabled = true;
+                UIManager.Instance.SetPauseScreen(false);
+                Time.timeScale = 1;
+            }
+            else
+            {
+                block.enabled = false;
+                UIManager.Instance.SetPauseScreen(true);
+                Time.timeScale = 0;
+            }
+                
+        }
+    }
     #endregion
 
     #region GameMaster Functions
@@ -147,12 +168,12 @@ public class GameMaster : MonoBehaviour
 
     public void SpawnBlock()
     {
-        TetrisBlock _block = Instantiate(blocksPrefabs[blocksQueue.Dequeue()], board.SpawnPosition, Quaternion.identity).GetComponent<TetrisBlock>();
-        _block.SetSpeed(blockSpeed);
+        block = Instantiate(blocksPrefabs[blocksQueue.Dequeue()], board.SpawnPosition, Quaternion.identity).GetComponent<TetrisBlock>();
+        block.SetSpeed(blockSpeed);
 
-        if (!CheckBlockPosition(_block.Blocks))
+        if (!CheckBlockPosition(block.Blocks))
         {
-            Destroy(_block.gameObject);
+            Destroy(block.gameObject);
             RestartGame();
         }
         else
