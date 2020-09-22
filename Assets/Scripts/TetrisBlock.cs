@@ -7,12 +7,14 @@ public class TetrisBlock : MonoBehaviour
 {
     #region Unity Editor Variables
     [Header("Gameplay")]
+    [SerializeField] private GameObject blocksAnchor;
     [SerializeField] private GameObject ghostPrefab;
 
     [Header("SFX")]
     [SerializeField] private string moveAudioName;
     [SerializeField] private string blockedMoveAudioName;
     [SerializeField] private string rotateAudioName;
+
     #endregion
 
     #region Control Variables
@@ -34,12 +36,12 @@ public class TetrisBlock : MonoBehaviour
         myTransform = GetComponent<Transform>();
 
         int i = 0;
-        Transform[] _blocks = GetComponentsInChildren<Transform>();
+        Transform[] _blocks = blocksAnchor.GetComponentsInChildren<Transform>();
 
         Blocks = new Transform[_blocks.Length-1];
         foreach (Transform _tranform in _blocks)
         {
-            if (_tranform != myTransform)
+            if (_tranform != blocksAnchor.transform)
                 Blocks[i++] = _tranform;
         }
     }
@@ -69,7 +71,7 @@ public class TetrisBlock : MonoBehaviour
 
         }
 
-        if (nextMove > blockSpeed)
+        if (nextMove > ((Input.GetKey(KeyCode.DownArrow)) ? 0.1f: blockSpeed))
         {
             nextMove = 0;
             if (!MoveBlock(new Vector3(0, -1, 0)))
@@ -81,7 +83,7 @@ public class TetrisBlock : MonoBehaviour
                 //myScript.enabled = false;
                 DestroyBlock();
             }
-        }else if (Input.GetKeyDown(KeyCode.DownArrow))
+        }else if (Input.GetKeyDown(KeyCode.RightControl))
         {
             int count = 0;
             while (MoveBlock(Vector3.down))
@@ -89,7 +91,7 @@ public class TetrisBlock : MonoBehaviour
                 count++;
             }
 
-            nextMove = (count == 0) ? blockSpeed : 0;
+            nextMove = blockSpeed;
         }
     }
     #endregion
@@ -102,7 +104,7 @@ public class TetrisBlock : MonoBehaviour
             _block.parent = GameMaster.Instance.gameObject.transform;
         }
 
-        Destroy(ghost.gameObject);
+        ghost.DestroyBlock();
         Destroy(gameObject);
     }
 

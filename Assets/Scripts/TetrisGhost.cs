@@ -4,21 +4,25 @@ using UnityEngine;
 
 public class TetrisGhost : MonoBehaviour
 {
-    private Vector3 rotationPoint;
+    [SerializeField] private GameObject blocksAnchor;
+
     private Transform myTransform;
+    private Animator animator;
+
     public Transform[] Blocks { get; private set; }
 
     private void Awake()
     {
         myTransform = GetComponent<Transform>();
+        animator = GetComponent<Animator>();
 
         int i = 0;
-        Transform[] _blocks = GetComponentsInChildren<Transform>();
+        Transform[] _blocks = blocksAnchor.GetComponentsInChildren<Transform>();
 
         Blocks = new Transform[_blocks.Length - 1];
         foreach (Transform _tranform in _blocks)
         {
-            if (_tranform != myTransform)
+            if (_tranform != blocksAnchor.transform)
                 Blocks[i++] = _tranform;
         }
     }
@@ -54,4 +58,19 @@ public class TetrisGhost : MonoBehaviour
 
         return true;
     }
+
+    public void DestroyBlock()
+    {
+        StartCoroutine(AnimateAndDestroy());
+    }
+
+    private IEnumerator AnimateAndDestroy()
+    {
+        animator.SetTrigger("DestroyGhost");
+
+        yield return new WaitForSeconds(1f);
+
+        Destroy(gameObject);
+    }
+
 }
