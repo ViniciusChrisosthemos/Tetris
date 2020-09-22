@@ -72,7 +72,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.05
+  m_Time: 0.1
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -110,8 +110,8 @@ TrailRenderer:
       ctime6: 0
       ctime7: 0
       atime0: 0
-      atime1: 3662
-      atime2: 0
+      atime1: 4048
+      atime2: 11565
       atime3: 0
       atime4: 0
       atime5: 0
@@ -121,12 +121,12 @@ TrailRenderer:
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
-    numCapVertices: 0
+    numCapVertices: 10
     alignment: 0
     textureMode: 1
     shadowBias: 0.5
     generateLightingData: 0
-  m_MinVertexDistance: 0.5
+  m_MinVertexDistance: 0
   m_Autodestruct: 0
   m_Emitting: 1
 --- !u!1 &989627452958868726
@@ -235,7 +235,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.05
+  m_Time: 0.1
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -273,8 +273,8 @@ TrailRenderer:
       ctime6: 0
       ctime7: 0
       atime0: 0
-      atime1: 3662
-      atime2: 0
+      atime1: 4048
+      atime2: 11565
       atime3: 0
       atime4: 0
       atime5: 0
@@ -284,12 +284,12 @@ TrailRenderer:
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
-    numCapVertices: 0
+    numCapVertices: 10
     alignment: 0
     textureMode: 1
     shadowBias: 0.5
     generateLightingData: 0
-  m_MinVertexDistance: 0.5
+  m_MinVertexDistance: 0
   m_Autodestruct: 0
   m_Emitting: 1
 --- !u!1 &8085601607403426691
@@ -731,4 +731,3 @@ MonoBehaviour:
   moveAudioName: move
   blockedMoveAudioName: blockedMove
   rotateAudioName: rotate
-  destroyBlockEffect: {fileID: 3621297278591439169, guid: db0469e40f07dd24985de3caa41cf57c, type: 3}
