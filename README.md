@@ -7,3 +7,7 @@
 # Gameplay
 
 ![Main Screen](https://github.com/ViniciusChrisosthemos/Tetris/blob/master/Images/Gameplay.png)
+
+# Donwload
+
+- [Link to Drive](https://drive.google.com/file/d/1t1ara9GKFTcjno_W4snzREvQnSO0T_Px/view?usp=sharing)
