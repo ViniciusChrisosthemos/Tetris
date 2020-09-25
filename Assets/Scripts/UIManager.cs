@@ -13,7 +13,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI comboText;
     [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private TextMeshProUGUI xpText;
-    [SerializeField] private TextMeshProUGUI blockSpeedText;
     [SerializeField] private Slider xpSlider;
     [SerializeField] private List<Sprite> fullBlocksSprites;
     [SerializeField] private List<Image> fullBlocksQueue;
@@ -46,11 +45,6 @@ public class UIManager : MonoBehaviour
         scoreText.text = $"Score: {_score}";
     }
 
-    public void SetBlockedSpeed(float _blockSpeed)
-    {
-        blockSpeedText.text = string.Format("Block speed: {0:0.0}", _blockSpeed);
-    }
-
     public void SetNextLevelXp(int _nextLevelXp)
     {
         xpSlider.maxValue = _nextLevelXp;
@@ -67,9 +61,9 @@ public class UIManager : MonoBehaviour
         levelText.text = $"Level {_level}";
     }
 
-    public void SetCurrentCombo(float _currentCombo)
+    public void SetCurrentCombo(int _currentCombo)
     {
-        comboText.text = string.Format("Combo {0:0.00}x", _currentCombo);
+        comboText.text = $"Combo {_currentCombo}x";
     }
 
     public void SetPauseScreen(bool _value)

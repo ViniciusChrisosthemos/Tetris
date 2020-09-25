@@ -34,8 +34,8 @@ public class GameMaster : MonoBehaviour
     private int score = 0;
     private int pointsPerLine = 100;
 
-    private float currentCombo = 0;
-    private float comboRate = .5f;
+    private int comboStreak = 0;
+    private int comboValue = 0;
 
     private int xp = 0;
     private int level = 1;
@@ -63,7 +63,6 @@ public class GameMaster : MonoBehaviour
         set
         {
             blockSpeed = value;
-            UIManager.Instance.SetBlockedSpeed(blockSpeed);
         }
     }
     public int Level
@@ -93,13 +92,14 @@ public class GameMaster : MonoBehaviour
             UIManager.Instance.SetScore(score);
         }
     }
-    public float CurrentCombo
+
+    public int ComboValue
     {
-        get => currentCombo;
+        get => comboValue;
         set
         {
-            currentCombo = value;
-            UIManager.Instance.SetCurrentCombo(currentCombo);
+            comboValue = value;
+            UIManager.Instance.SetCurrentCombo(comboValue);
         }
     }
 
@@ -141,6 +141,9 @@ public class GameMaster : MonoBehaviour
             }
                 
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
     }
     #endregion
 
@@ -151,7 +154,7 @@ public class GameMaster : MonoBehaviour
         Xp = 0;
         Score = 0;
         Level = 1;
-        CurrentCombo = 0;
+        ComboValue = 0;
         BlockSpeed = defaultBlockSpeed;
     }
 
@@ -255,10 +258,11 @@ public class GameMaster : MonoBehaviour
 
         if (linesDeleted > 0)
         {
-            CurrentCombo += comboRate * linesDeleted + .5f;
-            Score += (int)(CurrentCombo * pointsPerLine);
+            comboStreak++;
+            ComboValue += linesDeleted;
+            Score += (int)(ComboValue * pointsPerLine);
 
-            Xp += (int)(xpPerLine * CurrentCombo);
+            Xp += (int)(xpPerLine * ComboValue);
 
             if (Xp >= nextLevelXp)
             {
@@ -269,11 +273,12 @@ public class GameMaster : MonoBehaviour
                 BlockSpeed *= speedRate; 
             }
 
-            SoundManager.Instance.PlaySound(lineDeletedSounds[Math.Min(linesDeleted, lineDeletedSounds.Count-1)]);
+            SoundManager.Instance.PlaySound(lineDeletedSounds[Math.Min(comboStreak - 1, lineDeletedSounds.Count-1)]);
         }
         else
         {
-            CurrentCombo = 0;
+            comboStreak = 0;
+            ComboValue = 0;
         }
 
     }
